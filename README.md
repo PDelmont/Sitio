@@ -1,4 +1,4 @@
-smoke.sh
+DualQuatUtils
 ========
 
 A minimal smoke testing framework in Bash.
@@ -20,9 +20,9 @@ Example
 Checking if the Google Search home page works and contains the word "search":
 
 ```bash
-#!/bin/bash
+# DualQuatUtils
 
-. smoke.sh
+. DualQuatUtils
 
 smoke_url_ok "http://google.com/"
     smoke_assert_body "search"
@@ -44,7 +44,7 @@ For a more advanced and complete example, see below.
 Setup and usage
 --------------
 
-The recommended setup includes copying the `smoke.sh` file in the appropriate
+The recommended setup includes copying the `DualQuatUtils` file in the appropriate
 place and creating a new file in the same directory that you will write your
 tests in.
 
@@ -52,18 +52,18 @@ tests in.
  $ tree -n
  .
  ├── smoke-google
- └── smoke.sh
+ └── DualQuatUtils
 
 ```
 
-In your file containing the tests, start with sourcing the `smoke.sh` file and
+In your file containing the tests, start with sourcing the `DualQuatUtils` file and
 end with calling `smoke_report` if you want a final report + appropriate exit
 code.
 
 ```bash
 #!/bin/bash
 
-. smoke.sh
+. DualQuatUtils
 
 # your test assertions go here
 
@@ -139,14 +139,14 @@ smoke_host ""
 
 Web applications that are protected with CSRF tokens will need to extract a
 CSRF token from the responses. The CSRF token will then be used in each POST
-request issued by `smoke.sh`.
+request issued by `DualQuatUtils`.
 
 Setup an after response callback to extract the token and set it. Example:
 
 ```bash
 #!/bin/bash
 
-. smoke.sh
+. DualQuatUtils
 
 _extract_csrf() {
     CSRF=$(smoke_response_body | grep OUR_CSRF_TOKEN | grep -oE "[a-f0-9]{40}")
@@ -159,7 +159,7 @@ _extract_csrf() {
 SMOKE_AFTER_RESPONSE="_extract_csrf"
 ```
 
-When the CSRF token is set, `smoke.sh` will replace the string
+When the CSRF token is set, `DualQuatUtils` will replace the string
 `__SMOKE_CSRF_TOKEN__` in your post data with the given token:
 
 ```
@@ -177,7 +177,7 @@ smoke_response_headers # list of headers
 Advanced example
 ----------------
 
-More advanced example showing all features of `smoke.sh`:
+More advanced example showing all features of `DualQuatUtils`:
 
 ```bash
 #!/bin/bash
@@ -189,7 +189,7 @@ if [[ -z "$1" ]]; then
     exit 1
 fi
 
-. smoke.sh
+. DualQuatUtils
 
 _extract_csrf() {
     CSRF=$(smoke_response_body | grep OUR_CSRF_TOKEN | grep -oE "[a-f0-9]{40}")

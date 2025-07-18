@@ -20,7 +20,7 @@ Example
 Checking if the Google Search home page works and contains the word "search":
 
 ```bash
-# Regression
+# guacamole
 
 . DualQuatUtils
 
